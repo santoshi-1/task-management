@@ -1,5 +1,6 @@
 import { Grid } from '@mui/material';
 import React, { FC, ReactElement } from 'react';
+import { Profile } from '../profile/profile';
 
 export const SideBar: FC = (): ReactElement => {
   return (
@@ -19,7 +20,7 @@ export const SideBar: FC = (): ReactElement => {
         alignItems: 'center',
       }}
     >
-      <h2>Side Area</h2>
+      <Profile name="Santoshi Karuturi" />
     </Grid>
   );
 };
