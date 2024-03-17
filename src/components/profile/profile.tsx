@@ -17,13 +17,14 @@ export const Profile: FC<IProfile> = (
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
+      mt={4}
     >
       <Avatar
         sx={{
           width: '96px',
           height: '96px',
           backgroundColor: 'primary.main',
-          marginBottom: '16px',
+          marginBottom: '8px',
         }}
       >
         <Typography variant="h4" color="text.primary">

@@ -15,7 +15,7 @@ export const CreateTaskForm: FC = (): ReactElement => {
       alignItems="flex-start"
       width="100%"
       px={4}
-      my={6}
+      my={4}
     >
       <Typography mb={2} component="h2" variant="h6">
         Create A Task
