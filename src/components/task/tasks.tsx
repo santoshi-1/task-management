@@ -7,13 +7,16 @@ import { ITask } from './interfaces/ITask';
 import { Priority } from '../createTaskForm.tsx/enums/priority';
 import PropTypes from 'prop-types';
 import { renderPriorityBorderColor } from './helpers/renderPriorityBorderColor';
+import { Status } from '../createTaskForm.tsx/enums/status';
 
 export const Task: FC<ITask> = (props): ReactElement => {
   const {
+    id,
     title = 'Test Title',
     date = new Date(),
     description = 'Task description',
     priority = Priority.normal,
+    status = Status.completed,
     onStatusChange = (e) => console.log(e),
     onClick = (e) => console.log(e),
   } = props;
@@ -37,6 +40,8 @@ export const Task: FC<ITask> = (props): ReactElement => {
       <TaskHeader title={title} date={date} />
       <TaskDescription description={description} />
       <TaskFooter
+        id={id}
+        status={status}
         onClick={onClick}
         onStatusChange={onStatusChange}
       />
