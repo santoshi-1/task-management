@@ -1,4 +1,9 @@
-import React, { FC, ReactElement } from 'react';
+import React, {
+  FC,
+  ReactElement,
+  useContext,
+  useEffect,
+} from 'react';
 import {
   Grid,
   Box,
@@ -16,9 +21,15 @@ import { sendApiRequest } from '../../helpers/sendApiRequest';
 import { ITaskApi } from './interfaces/ITaskApi';
 import { Status } from '../createTaskForm.tsx/enums/status';
 import { IUpdateTask } from './interfaces/IUpdateTask';
+import { countTasks } from './helpers/countTasks';
+import { TaskStatusChangedContext } from '../../context';
 
 export const TaskArea: FC = (): ReactElement => {
-  const { error, isLoading, data } = useQuery({
+  const taskUpdateContext = useContext(
+    TaskStatusChangedContext,
+  );
+
+  const { error, isLoading, data, refetch } = useQuery({
     queryKey: ['tasks'],
     queryFn: async () => {
       return await sendApiRequest<ITaskApi[]>(
@@ -37,6 +48,16 @@ export const TaskArea: FC = (): ReactElement => {
         data,
       ),
   });
+
+  useEffect(() => {
+    refetch();
+  }, [taskUpdateContext.updated]);
+
+  useEffect(() => {
+    if (updateTaskMutation.isSuccess) {
+      taskUpdateContext.toggle();
+    }
+  }, [updateTaskMutation.isSuccess]);
 
   function onStatusChangeHandler(
     e: React.ChangeEvent<HTMLInputElement>,
@@ -85,9 +106,30 @@ export const TaskArea: FC = (): ReactElement => {
           xs={12}
           mb={8}
         >
-          <TaskCounter />
-          <TaskCounter />
-          <TaskCounter />
+          <TaskCounter
+            count={
+              data
+                ? countTasks(data, Status.todo)
+                : undefined
+            }
+            status={Status.todo}
+          />
+          <TaskCounter
+            count={
+              data
+                ? countTasks(data, Status.inProgress)
+                : undefined
+            }
+            status={Status.inProgress}
+          />
+          <TaskCounter
+            count={
+              data
+                ? countTasks(data, Status.completed)
+                : undefined
+            }
+            status={Status.completed}
+          />
         </Grid>
         <Grid
           item
