@@ -1,10 +1,13 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Task Management Application
+This task management application offers a user-friendly frontend for efficient organization of to-dos. Users can add, remove, prioritize tasks, mark them in progress, and set due dates effortlessly. Built using React and TypeScript, it provides a seamless and intuitive experience for managing tasks.
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+
+To install all the dependencies required for the project to run.
 
 ### `npm start`
 
